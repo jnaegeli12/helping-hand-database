@@ -1,0 +1,69 @@
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="/">
+        <img src="/assets/Helping-Hand-Logo.png" height="50" class="d-inline-block align-top" alt="Helping Hand logo">
+        Helping Hand
+    </a>
+    <form class="form-inline">
+        <a href="/submit"><button class="btn btn-danger" type="button">Add a Service Organization</button></a>
+    </form>
+</nav>
+
+<section id="first-question">
+    <div class="container-fluid">
+        <h1>What do you need?</h1>
+    </div>
+    <div class="container">
+        <button class="btn btn-icon" id="food"><img class="main-services" src="/assets/food-icon.png"
+                width="300px"></button>
+        <button class="btn btn-icon" id="shelter"><img class="main-services" src="/assets/shelter-icon.png"
+                width="300px"></button>
+    </div>
+    <div class="container">
+        <button class="btn btn-icon" id="health"><img class="main-services" src="/assets/health-icon.png"
+                width="300px"></button>
+        <button class="btn btn-icon" id="daily" type="submit"><img class="main-services"
+                src="/assets/daily-icon.png" width="300px"></button>
+    </div>
+</section>
+
+<section id="food-results" style="display: none;">
+    <h2>Food Results</h2>
+        {{#each help}}
+        {{#if food}}
+        {{> food-results}}
+        {{/if}}
+        {{/each}}
+        <script>
+            let help = {{help}}
+            console.log(help)
+        </script>
+</section>
+
+<section id="shelter-results" style="display: none;">
+    <h2>Shelter Results</h2>
+        {{#each help}}
+        {{#if shelter}}
+        {{> shelter-results}}
+        {{/if}}
+        {{/each}}
+</section>
+
+<section id="health-results" style="display: none;">
+    <h2>Health Results</h2>
+        {{#each help}}
+        {{#if health_care}}
+        {{> health-results}}
+        {{/if}}
+        {{/each}}
+</section>
+
+<section id="daily-results" style="display: none;">
+    <h2>Daily Results</h2>
+        {{#each help}}
+        {{#if daily_care}}
+        {{> daily-results}}
+        {{/if}}
+        {{/each}}
+</section>
+
+<script src="/js/helpinghand.js"></script>
