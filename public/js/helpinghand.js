@@ -1,28 +1,72 @@
-// redo variables and show/hide code
 const firstQuestion = document.getElementById("first-question");
-const foodService = document.getElementById("food-service");
-const shelterService = document.getElementById("shelter-service");
-const healthService = document.getElementById("health-service");
-const chooseGender = document.getElementById("gender");
-const chooseAge = document.getElementById("age");
+const foodResults = document.getElementById("food-results");
+const shelterResults = document.getElementById("shelter-results");
+const healthResults = document.getElementById("health-results");
+const dailyResults = document.getElementById("daily-results");
 
-$("#food").click(function() {
+$("#food").click(function () {
     firstQuestion.style.display = "none";
-    foodService.style.display = "";
+    foodResults.style.display = "";
+    $.ajax('/api/food/', {
+        type: 'GET'
+    }).then(function(data) {
+        console.log(data);
+        console.log('data for shelter added')
+    })
 });
 
-$("#shelter").click(function() {
+$("#shelter").click(function () {
     firstQuestion.style.display = "none";
-    shelterService.style.display = "";
+    shelterResults.style.display = "";
+    $.get('/api/shelter/', function(data, status) {
+        console.log(data);
+    });
 });
 
-$("#health").click(function() {
+$("#health_care").click(function () {
     firstQuestion.style.display = "none";
-    healthService.style.display = "";
+    healthResults.style.display = "";
+    $.ajax('/api/health_care/', {
+        type: 'GET'
+    }).then(function(data) {
+        console.log(data);
+        console.log('data for healthcare added')
+    })
 });
 
-$("#daily").click(function() {
+$('#daily_care').click(function () {
     firstQuestion.style.display = "none";
-    chooseGender.style.display = "";
-    sessionStorage.setItem(1, "daily_care")
+    dailyResults.style.display = "";
+
+    $.ajax('/api/daily_care/', {
+        type: 'GET'
+    }).then(function(data) {
+        console.log(data);
+        console.log('data for dailycare added')
+    })
+});
+
+$("#new-org").on("click", function (event) {
+    event.preventDefault();
+
+    const newOrganization = {
+        name: $("#org-name").val().trim(),
+        address: $("#address").val().trim(),
+        city: $("#city").val().trim(),
+        state: $("#state").val().trim(),
+        zip: $("#zip").val().trim(),
+        phone_number: $("#phone_number").val().trim(),
+        website: $("#website").val().trim()
+    };
+    console.log(newOrganization);
+
+    $.ajax("/api/organization", {
+        type: "POST",
+        data: newOrganization
+    }).then(
+        function () {
+            console.log("created new organization");
+            location.reload();
+        }
+    );
 });

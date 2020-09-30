@@ -13,7 +13,7 @@ app.use(express.json());
 // Set Handlebars.
 const exphbs = require("express-handlebars");
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({ defaultLayout: "main", partialsDir: __dirname + '/views/partials/'}));
 app.set("view engine", "handlebars");
 
 // Import routes and give the server access to them.
