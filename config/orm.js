@@ -1,4 +1,4 @@
-const connection = require('./connection')
+const connection = require("./connection.js");
 
 function printQuestionMarks(num) {
     var arr = [];
@@ -11,22 +11,49 @@ function printQuestionMarks(num) {
 }
 
 const orm = {
-    selectTopic: function (table, input, cb) {
-        let queryString = `SELECT name, address, city, state, zip, website, phone_number FROM ${table} WHERE ${input} = 1;`;
-        connection.query(queryString, input, function (err, res) {
-            if (err) throw err;
-            cb(res)
-        })
+    selectAll: function(cb) {
+        let queryString= "SELECT * FROM organizations ORDER BY name;"
+        connection.query(queryString, function(err, result) {
+            if(err) throw err;
+            cb(result);
+        });
     },
-    create: function (table, col, val, cb) {
-        let queryString = 'INSERT INTO ' + table;
-        
+    selectAllFood: function(cb) {
+        let queryString = "SELECT * FROM organizations WHERE food_bank = 1 or served_meal = 1;"
+        connection.query(queryString, function(err, result) {
+            if(err) throw err;
+            cb(result);
+        });
+    },
+    selectAllShelter: function(cb) {
+        let queryString = "SELECT * FROM organizations WHERE immediate_shelter = 1 or longterm_shelter = 1;"
+        connection.query(queryString, function(err, result) {
+            if(err) throw err;
+            cb(result);
+        });
+    },
+    selectAllHealth: function(cb) {
+        let queryString = "SELECT * FROM organizations WHERE urgent_care = 1 or dental = 1 or mental = 1;"
+        connection.query(queryString, function(err, result) {
+            if(err) throw err;
+            cb(result);
+        });
+    },
+    selectAllDaily: function(cb) {
+        let queryString = "SELECT * FROM organizations WHERE daily = 1;"
+        connection.query(queryString, function(err, result) {
+            if(err) throw err;
+            cb(result);
+        });
+    },
+    createOrg: function(col, val, cb) {
+        let queryString = 'INSERT INTO organizations';
         queryString += ' (' + col.toString() + ') ';
         queryString += 'VALUES (' + printQuestionMarks(val.length) + ')';
         console.log(queryString);
-        connection.query(queryString, col, val, function (err, res) {
+        connection.query(queryString, val, function(err, result) {
             if (err) throw err;
-            cb(res);
+            cb(result);
         });
     }
 };
