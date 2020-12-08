@@ -61,13 +61,36 @@ export default class Submit extends React.Component {
             female: this.state.female,
             family_youth: this.state.family_youth
         }
-        console.log(newOrg);
+
         API.createOrg(newOrg)
             .then((response) => {
                 console.log(response);
-                // this.setState(this.state);
             })
             .catch((err) => console.log(err));
+            
+            this.setState({
+                name: "",
+                address: "",
+                city: "",
+                state: "WA",
+                zip: null,
+                phone_number: "",
+                website: "",
+                served_meal: false,
+                food_bank: false,
+                immediate_shelter: false,
+                longterm_shelter: false,
+                urgent_care: false,
+                dental: false,
+                mental: false,
+                daily: false,
+                description: "",
+                age_min: null,
+                age_max: null,
+                male: false,
+                female: false,
+                family_youth: false
+            })
     }
 
     render() {
@@ -75,7 +98,7 @@ export default class Submit extends React.Component {
             <div className="container container-fluid">
                 <Header headerName={"Submit an Organization"} />
                 <div className="container container-fluid col-8">
-                    <form onSubmit={this.handleSubmit}>
+                    <form id="submit-form" onSubmit={this.handleSubmit}>
                         {/* <!-- Organization Name --> */}
                         <div className="form-group">
                             <label 
@@ -272,7 +295,7 @@ export default class Submit extends React.Component {
                                 </div>
                                 <div className="form-check form-check-inline col-3">
                                     <input 
-                                        name="dental_care"
+                                        name="daily"
                                         type="checkbox" 
                                         value={this.state.daily} 
                                         onChange={this.handleChange} 
