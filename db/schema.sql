@@ -26,5 +26,6 @@ CREATE TABLE organizations (
     male BOOLEAN DEFAULT false,
     female BOOLEAN DEFAULT false,
     family_youth BOOLEAN DEFAULT false,
+    createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(id)
 );

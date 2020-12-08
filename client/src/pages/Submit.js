@@ -90,7 +90,7 @@ export default class Submit extends React.Component {
         return(
             <div className="container container-fluid">
                 <Header headerName={"Submit an Organization"} />
-                {showHideForm && <div className="container container-fluid col-8">
+                {showHideForm && <div className="container container-fluid">
                     <form id="submit-form" onSubmit={this.handleSubmit}>
                         {/* <!-- Organization Name --> */}
                         <div className="form-group">
@@ -136,7 +136,6 @@ export default class Submit extends React.Component {
                                     name="state"
                                     value={this.state.state} 
                                     onChange={this.handleChange}
-                                    id="state" 
                                     className="form-control">
                                     <option value="WA">WA</option>
                                 </select>
@@ -378,7 +377,7 @@ export default class Submit extends React.Component {
                     </form>
                 </div>}
                 {showHideForm2 && <div className="container container-fluid">
-                    <h3>Organization has been added successfully!</h3>
+                    <h3>{this.state.name} has been added successfully!</h3>
                 </div>}
             </div>
             
