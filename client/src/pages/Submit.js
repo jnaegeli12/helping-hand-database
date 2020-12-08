@@ -25,7 +25,8 @@ export default class Submit extends React.Component {
         male: false,
         female: false,
         family_youth: false,
-        showHideForm: true
+        showHideForm: true,
+        showHideForm2: false
     }
     
     handleChange = (event) => {
@@ -39,6 +40,10 @@ export default class Submit extends React.Component {
 
     hideComponent = (item) => {
         this.setState({ showHideForm: false })
+    }
+
+    showComponent = (item) => {
+        this.setState({ showHideForm2: true })
     }
 
     handleSubmit = (event)  => {
@@ -74,12 +79,14 @@ export default class Submit extends React.Component {
             .catch((err) => console.log(err));
             
         this.hideComponent("showHideForm");
+        this.showComponent("showHideForm2");
 
-        return "Organization has been successfully added."
+        // alert("Organization has been successfully added.");
+
     }
 
     render() {
-        const { showHideForm } = this.state;
+        const { showHideForm, showHideForm2 } = this.state;
         return(
             <div className="container container-fluid">
                 <Header headerName={"Submit an Organization"} />
@@ -369,6 +376,9 @@ export default class Submit extends React.Component {
                     
                         <button type="submit" className="btn btn-primary">Submit</button>
                     </form>
+                </div>}
+                {showHideForm2 && <div className="container container-fluid">
+                    <h3>Organization has been added successfully!</h3>
                 </div>}
             </div>
             
