@@ -24,16 +24,21 @@ export default class Submit extends React.Component {
         age_max: null,
         male: false,
         female: false,
-        family_youth: false
+        family_youth: false,
+        showHideForm: true
     }
     
-    handleChange = event => {
+    handleChange = (event) => {
         const isCheckBox = event.target.type === 'checkbox';
         this.setState({ 
             [event.target.name]: isCheckBox 
             ? event.target.checked 
             : event.target.value 
          });
+    }
+
+    hideComponent = (item) => {
+        this.setState({ showHideForm: false })
     }
 
     handleSubmit = (event)  => {
@@ -68,36 +73,17 @@ export default class Submit extends React.Component {
             })
             .catch((err) => console.log(err));
             
-            this.setState({
-                name: "",
-                address: "",
-                city: "",
-                state: "WA",
-                zip: null,
-                phone_number: "",
-                website: "",
-                served_meal: false,
-                food_bank: false,
-                immediate_shelter: false,
-                longterm_shelter: false,
-                urgent_care: false,
-                dental: false,
-                mental: false,
-                daily: false,
-                description: "",
-                age_min: null,
-                age_max: null,
-                male: false,
-                female: false,
-                family_youth: false
-            })
+        this.hideComponent("showHideForm");
+
+        return "Organization has been successfully added."
     }
 
     render() {
+        const { showHideForm } = this.state;
         return(
             <div className="container container-fluid">
                 <Header headerName={"Submit an Organization"} />
-                <div className="container container-fluid col-8">
+                {showHideForm && <div className="container container-fluid col-8">
                     <form id="submit-form" onSubmit={this.handleSubmit}>
                         {/* <!-- Organization Name --> */}
                         <div className="form-group">
@@ -383,7 +369,7 @@ export default class Submit extends React.Component {
                     
                         <button type="submit" className="btn btn-primary">Submit</button>
                     </form>
-                </div>
+                </div>}
             </div>
             
         )
